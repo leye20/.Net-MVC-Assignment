@@ -13,10 +13,10 @@ namespace AspNetCoreMovie.Controllers
     public class MovieController : Controller
     {
         // GET: /<controller>/
-        private readonly IMovieItemServices _movieItemService;
+        private readonly IMovieItemService _movieItemService;
         public async Task<IActionResult> Index() 
         {
-            var items = await _movieItemService.GetIncompleteItemAsync(); // i took out the "s" in the items from the book.
+            var items = await _movieItemService.GetIncompleteItemsAsync(); // i took out the "s" in the items from the book.
             
             var model = new MovieViewModel()
             {

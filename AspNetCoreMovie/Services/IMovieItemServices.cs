@@ -5,8 +5,10 @@ using AspNetCoreMovie.Models;
 
 namespace AspNetCoreMovie.Services
 {
-    public interface IMovieItemServices
+    public interface IMovieItemService
     {
-        Task<MovieItem[]> GetIncompleteItemAsync();
+        Task<MovieItem[]> GetIncompleteItemsAsync();
+
+        Task<bool> AddItemAsync(MovieItem newItem);
     }
 }

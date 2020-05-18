@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreMovie.Models;
-//using Microsoft.EntityFrameworkCore;
+using AspNetCoreMovie.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreMovie.Services
 {
-    public class MovieItemServices : IMovieItemServices
+    public class MovieItemService : IMovieItemService
     {
         private readonly ApplicationDbContext _context;
         public MovieItemService(ApplicationDbContext context)
