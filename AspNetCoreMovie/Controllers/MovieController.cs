@@ -13,10 +13,12 @@ namespace AspNetCoreMovie.Controllers
     public class MovieController : Controller
     {
         // GET: /<controller>/
+        // private readonly List<string> MovieList = new List<string>(); // method to manipulate string
+
         private readonly IMovieItemService _movieItemService;
-        public async Task<IActionResult> Index() 
+        public async Task<IActionResult> Index()
         {
-            var items = await _movieItemService.GetIncompleteItemsAsync(); // i took out the "s" in the items from the book.
+            var items = await _movieItemService.GetIncompleteItemsAsync(); // var replaced with MovieItem
             
             var model = new MovieViewModel()
             {
@@ -25,20 +27,20 @@ namespace AspNetCoreMovie.Controllers
             return View(model);
         }
 
-        /*[ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddItem(TodoItem newItem)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddItem(MovieItem newItem)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Index");
             }
-            var successful = await _todoItemService.AddItemAsync(newItem);
+            var successful = await _movieItemService.AddItemAsync(newItem);
             if (!successful)
             {
                 return BadRequest("Could not add item.");
             }
             return RedirectToAction("Index");
-        }*/
+        }
 
     }
 }

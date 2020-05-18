@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AspNetCoreMovie.Models;
+using AspNetCoreMovie.Services;
 
 namespace AspNetCoreMovie
 {
@@ -37,6 +38,8 @@ namespace AspNetCoreMovie
            services.AddRazorPages();
 
             services.AddMvc();
+
+            services.AddScoped<IMovieItemService, MovieItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
