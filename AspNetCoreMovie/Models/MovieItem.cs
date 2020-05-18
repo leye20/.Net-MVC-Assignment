@@ -9,6 +9,7 @@ namespace AspNetCoreMovie.Models
     public class MovieItem
     {
         public Guid Id { get; set; }
+        public bool IsDone { get; set; }
         [Required]
         public string Title { get; set; }
         public DateTime ReleaseDate { get; set; }
