@@ -16,6 +16,11 @@ namespace AspNetCoreMovie.Controllers
         // private readonly List<string> MovieList = new List<string>(); // method to manipulate string
 
         private readonly IMovieItemService _movieItemService;
+
+        public MovieController(IMovieItemService movieItemService)
+        {
+            _movieItemService = movieItemService;
+        }
         public async Task<IActionResult> Index()
         {
             var items = await _movieItemService.GetIncompleteItemsAsync(); // var replaced with MovieItem
