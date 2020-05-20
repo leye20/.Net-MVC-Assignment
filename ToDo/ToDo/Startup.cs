@@ -28,6 +28,7 @@ namespace ToDo
         {
             services.AddRazorPages();
 
+            // this code below configures the database connection
             services.AddDbContext<ToDoContext>(options =>
                 options.UseSqlServer
                   (Configuration.GetConnectionString
