@@ -60,7 +60,7 @@ namespace ToDo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ToDo}/{action=Index}"
+                    pattern: "{controller=ToDoItem}/{action=Index}/{id?}"
                 );
                 //endpoints.MapRazorPages();
             });
