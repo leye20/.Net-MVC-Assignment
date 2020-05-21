@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using ContosoCrafts.Website.Models;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ContosoCrafts.WebSite.Services
+namespace ContosoCrafts.Website.Services
 {
     public class JsonFileProductService // Here is the class of products
     {
@@ -23,7 +24,7 @@ namespace ContosoCrafts.WebSite.Services
 
         public IEnumerable<Product> GetProducts() // Here gives us the lists of products from the class
         {
-            using (var jsonFileReader = File.OpenText(JsonFileName))
+            using(var jsonFileReader = File.OpenText(JsonFileName))
             {
                 return JsonSerializer.Deserialize<Product[]>(jsonFileReader.ReadToEnd(),
                     new JsonSerializerOptions
@@ -33,33 +34,37 @@ namespace ContosoCrafts.WebSite.Services
             }
         }
 
-        //public void AddRating(string productId, int rating)
+        //internal void AddRating(string productId, int rating)
         //{
-        //    var products = GetProducts();
-
-        //    if (products.First(x => x.Id == productId).Ratings == null)
-        //    {
-        //        products.First(x => x.Id == productId).Ratings = new int[] { rating };
-        //    }
-        //    else
-        //    {
-        //        var ratings = products.First(x => x.Id == productId).Ratings.ToList();
-        //        ratings.Add(rating);
-        //        products.First(x => x.Id == productId).Ratings = ratings.ToArray();
-        //    }
-
-        //    using (var outputStream = File.OpenWrite(JsonFileName))
-        //    {
-        //        JsonSerializer.Serialize<IEnumerable<Product>>(
-        //            new Utf8JsonWriter(outputStream, new JsonWriterOptions
-        //            {
-        //                SkipValidation = true,
-        //                Indented = true
-        //            }),
-        //            products
-        //        );
-        //    }
+        //    throw new NotImplementedException();
         //}
-    }
 
+        public void AddRating(string productId, int rating)
+        {
+            var products = GetProducts();
+
+            if (products.First(x => x.Id == productId).Ratings == null)
+            {
+                products.First(x => x.Id == productId).Ratings = new int[] { rating };
+            }
+            else
+            {
+                var ratings = products.First(x => x.Id == productId).Ratings.ToList();
+                ratings.Add(rating);
+                products.First(x => x.Id == productId).Ratings = ratings.ToArray();
+            }
+
+            using (var outputStream = File.OpenWrite(JsonFileName))
+            {
+                JsonSerializer.Serialize<IEnumerable<Product>>(
+                    new Utf8JsonWriter(outputStream, new JsonWriterOptions // this ensures our serialization can be read in any language.
+                    {
+                        SkipValidation = true,
+                        Indented = true
+                    }),
+                    products
+                );
+            }
+        }
+    }
 }
