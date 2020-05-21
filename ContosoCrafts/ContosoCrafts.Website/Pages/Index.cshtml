@@ -13,18 +13,3 @@
 @(await Html.RenderComponentAsync<ProductList>(RenderMode.ServerPrerendered))
 
 <script src="_framework/blazor.server.js"></script>
-
-@* loop below *@
-@*<div class="card-columns">
-    @foreach (var product in Model.Products)
-    {
-    <div class="card">
-        <div class="card-img" style="background-image: url('@product.Image');"></div>
-        <div class="card-body">
-            <h5 class="class-title">
-                @product.Title
-            </h5>
-        </div>
-    </div>
-    }
-</div>*@
